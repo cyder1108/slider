@@ -14,6 +14,7 @@ module.exports = class Slider extends EventEmitter {
     this.space      = 30;
     this.itemWidth = 0;
     this.slideTerm = 300;
+    this.roopMode = false;
     this.prevButton = document.createElement('div');
     this.nextButton = document.createElement('div');
   }
@@ -65,7 +66,11 @@ module.exports = class Slider extends EventEmitter {
     let last = this.current;
     this.current += this.slideUnit;
     if( this.current >= this.$items.length ) {
-      this.current = last;
+      if( this.roopMode ) {
+        this.current = 0;
+      } else {
+        this.current = last;
+      }
     }
     this.slide(term);
   }
